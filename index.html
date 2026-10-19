@@ -1,0 +1,468 @@
+# maimodserver (nomod) 公式Webサイト
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maimodserver (nomod) 公式サイト</title>
+    <!-- Tailwind CSS (許可ドメイン) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (許可ドメイン) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #060913;
+        }
+        .font-gaming {
+            font-family: 'Orbitron', sans-serif;
+
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* サイバーネオンなテキストシャドウ */
+        .neon-text-emerald {
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.6), 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+        .neon-text-cyan {
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.6), 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+        /* スムースなスクロールバーデザイン */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060913;
+        }
+        ::-webkit-scrollbar-thumb {
+
+            background: #182235;
+            border-radius: 4px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
+        }
+    </style>
+</head>
+<body class="text-gray-200 overflow-x-hidden selection:bg-emerald-500 selection:text-white">
+
+    <!-- ナビゲーションバー -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#060913]/80 backdrop-blur-lg border-b border-emerald-500/10 shadow-lg shadow-black/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center gap-3 group">
+                        <span class="text-2xl font-black font-gaming tracking-widest text-emerald-400 transition-all duration-300 group-hover:text-emerald-300 neon-text-emerald">maimodserver</span>
+
+                        <span class="px-2.5 py-0.5 text-xs font-black font-gaming bg-gray-900 text-emerald-400 rounded-md border border-emerald-500/30 uppercase tracking-wider">nomod</span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#about" class="text-gray-400 hover:text-emerald-400 font-medium tracking-wide transition-colors duration-300 text-sm">SERVER</a>
+                        <a href="#features" class="text-gray-400 hover:text-emerald-400 font-medium tracking-wide transition-colors duration-300 text-sm">FEATURES</a>
+                        <a href="#rules" class="text-gray-400 hover:text-emerald-400 font-medium tracking-wide transition-colors duration-300 text-sm">RULES</a>
+                        <a href="#links" class="text-gray-400 hover:text-emerald-400 font-medium tracking-wide transition-colors duration-300 text-sm">CONTENTS</a>
+                        <a href="https://maimodserver.1my.jp/#id109146" target="_blank" rel="noopener noreferrer" class="relative group overflow-hidden bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-2.5 rounded-lg text-sm font-bold tracking-wider transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40">
+                            <span class="relative z-10">COMMUNITY</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-400 hover:text-white focus:outline-none" aria-label="メニューを開く">
+                        <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- モバイルメニュー -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0a0f20] border-b border-emerald-500/20 px-6 pt-4 pb-6 space-y-3 shadow-2xl">
+            <a href="#about" class="block hover:text-emerald-400 py-2 rounded-md font-medium tracking-wide">SERVER ABOUT</a>
+            <a href="#features" class="block hover:text-emerald-400 py-2 rounded-md font-medium tracking-wide">FEATURES & BONUSES</a>
+            <a href="#rules" class="block hover:text-emerald-400 py-2 rounded-md font-medium tracking-wide">SERVER RULES</a>
+            <a href="#links" class="block hover:text-emerald-400 py-2 rounded-md font-medium tracking-wide">SPECIAL CONTENTS</a>
+            <a href="https://maimodserver.1my.jp/#id109146" target="_blank" rel="noopener noreferrer" class="block bg-gradient-to-r from-emerald-600 to-teal-600 text-center text-white py-3 rounded-lg font-bold tracking-widest shadow-lg shadow-emerald-500/20">JOIN COMMUNITY</a>
+        </div>
+    </nav>
+
+    <!-- ヒーローセクション -->
+    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-radial-gradient">
+        <!-- 背景ビジュアル・グリッドエフェクト -->
+        <div class="absolute inset-0 z-0">
+
+            <img src="https://images.unsplash.com/photo-1697479670670-d2a299df749c" alt="Minecraft Background" class="w-full h-full object-cover opacity-15 filter scale-105 contrast-125 brightness-75">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#060913] via-[#060913]/60 to-transparent"></div>
+            <!-- サイバー空間演出ライン -->
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center sm:px-6 lg:px-8">
+            <!-- プレミアムステータスバッジ -->
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-black font-gaming tracking-widest mb-8 backdrop-blur-md shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,1)] animate-ping"></span>
+                SERVER STATUS: ACTIVE
+            </div>
+
+            <!-- メインタイトル -->
+            <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black font-gaming tracking-tighter text-white mb-6 uppercase">
+                maimodserver<br class="sm:hidden"><span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 neon-text-cyan"> (nomod)</span>
+            </h1>
+            
+            <p class="text-base sm:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
+
+                Modの事前導入は一切不要。完全バニラ環境の魅力を限界まで研ぎ澄ました、24時間いつでもアクセス可能なパブリックサバイバルサーバー。
+            </p>
+
+            <!-- ネオンサイバー仕様のIPアドレスコピーコンポーネント -->
+            <div class="max-w-lg mx-auto bg-gray-950/80 p-2.5 rounded-2xl border border-emerald-500/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] flex flex-col sm:flex-row items-center gap-3 mb-16 backdrop-blur-md group hover:border-emerald-500/40 transition-colors duration-300">
+                <div class="flex items-center justify-between w-full px-4 py-3 bg-black/60 rounded-xl border border-gray-900 text-left overflow-x-auto">
+                    <div class="flex flex-col">
+                        <span class="text-[9px] uppercase font-black font-gaming tracking-widest text-emerald-500/70">CONNECTION ADDRESS</span>
+                        <span id="server-ip" class="text-base sm:text-lg font-mono font-bold text-gray-100 tracking-wide select-all">katherine-tomtom.tun.ply.gg</span>
+                    </div>
+                </div>
+                <button id="copy-btn" class="w-full sm:w-auto px-6 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black font-gaming text-sm tracking-widest rounded-xl transition-all duration-300 shadow-lg active:scale-95 flex items-center justify-center gap-2.5 whitespace-nowrap">
+                    <svg class="w-5 h-5 text-emerald-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                    </svg>
+                    <span id="copy-text">COPY IP</span>
+                </button>
+            </div>
+
+
+            <!-- スクロールダウンインジケーター -->
+            <div class="mt-4">
+                <a href="#about" class="inline-block text-emerald-500/40 hover:text-emerald-400 transition-colors duration-300 animate-bounce" aria-label="次のセクションへスクロール">
+                    <svg class="w-8 h-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- サーバーについて -->
+    <section id="about" class="py-28 bg-[#04060d] border-t border-gray-900/60 relative overflow-hidden">
+        <!-- 装飾的な光のオブジェクト -->
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-6 h-[2px] bg-emerald-500"></span>
+                        <h2 class="text-xs uppercase font-black tracking-widest text-emerald-400 font-gaming">ABOUT THE WORLD</h2>
+                    </div>
+                    <p class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-8 leading-tight">
+                        管理者 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 font-gaming">Mai</span> が統治する<br>過酷で自由なフロンティア
+                    </p>
+                    <div class="space-y-6 text-gray-400 leading-relaxed font-medium">
+                        <p>
+                            「maimodserver (nomod)」は、面倒なModやリソースパックの事前導入を一切必要としない、<strong>完全バニラ（プラグイン等による機能最適化）環境</strong>のマルチサバイバルサーバーです。
+                        </p>
+                        <p>
+                            面倒なホワイトリスト申請などは一切存在しません。初心者からベテラン建築家、孤独を愛する冒険者まで、24時間365日いつでもログインできます。広大な自然の中に巨大な帝国を築くのも、プレイヤー間の取引で富を築くのも、すべてはあなたの選択次第です。
+                        </p>
+                    </div>
+                </div>
+                <div class="relative rounded-3xl overflow-hidden border border-emerald-500/10 shadow-[0_0_50px_rgba(0,0,0,0.6)] group">
+                    <img src="https://images.unsplash.com/photo-1760114333167-7f254ca9f3c4" alt="Gameplay Concept" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-95">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-80"></div>
+
+                    <div class="absolute bottom-6 left-6 right-6 p-6 bg-black/40 backdrop-blur-md rounded-xl border border-white/5">
+                        <span class="text-[10px] font-black font-gaming text-emerald-400 tracking-wider block mb-1">WORLD RULES</span>
+                        <p class="text-xs text-gray-300">荒らし対策プラグインがバックグラウンドで24時間稼働し、あなたの資産を保護します。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特徴・特典セクション -->
+    <section id="features" class="py-28 bg-[#060913] relative overflow-hidden">
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <div class="inline-block px-3 py-1 bg-emerald-950/60 border border-emerald-500/20 text-emerald-400 text-xs font-black font-gaming tracking-widest rounded mb-3 uppercase">SERVER BENEFITS</div>
+                <p class="text-3xl sm:text-5xl font-black text-white tracking-tight">maimodserverのコア・システム</p>
+            </div>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 特典: 夜間特典 (ネオンハイライト) -->
+                <div class="bg-gradient-to-b from-[#0b1328] to-[#070c1a] p-8 rounded-3xl border border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.05)] hover:border-emerald-500/60 hover:shadow-[0_0_35px_rgba(16,185,129,0.15)] transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-gradient-to-l from-emerald-500 to-teal-600 text-white px-4 py-1.5 text-[10px] font-black font-gaming tracking-wider uppercase">NIGHT BONUS</div>
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-950/80 flex items-center justify-center text-emerald-400 mb-8 border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 shadow-inner">
+                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 17.657l.707-.707M7.757 6.343l.707-.707M8 12a4 4 0 118 0 4 4 0 01-8 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-emerald-300 transition-colors">夜間接続の限定インセンティブ</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed font-medium">
+                        当サーバーは<strong>夜の時間帯に来ると嬉しい特典</strong>が付与される特殊仕様！夜間のログインやサバイバル活動がより有利で刺激的になります。
+                    </p>
+                </div>
+
+                <!-- 特徴2 -->
+                <div class="bg-[#090f1d]/60 p-8 rounded-3xl border border-gray-900 hover:border-emerald-500/30 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-gray-950 flex items-center justify-center text-emerald-400 mb-8 border border-gray-900 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Mod不要・バニラ即接続</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed font-medium">
+                        外部Modのインストールによるクラッシュトラブルや設定変更は不要。お持ちのバニラMinecraftのマルチプレイ画面からアドレスを入力するだけで即座に開始できます。
+                    </p>
+                </div>
+
+                <!-- 特徴3 -->
+                <div class="bg-[#090f1d]/60 p-8 rounded-3xl border border-gray-900 hover:border-emerald-500/30 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-gray-950 flex items-center justify-center text-emerald-400 mb-8 border border-gray-900 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">鉄壁のセキュリティログ</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed font-medium">
+                        プレイヤーの全行動データをバックグラウンドで緻密に記録。不適切な破壊やインベントリからの窃盗行為を許さず、クリーンで安心できる治安を維持します。
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 利用規約（ルール） -->
+    <section id="rules" class="py-28 bg-[#04060d] border-t border-gray-900/60 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <div class="inline-block px-3 py-1 bg-emerald-950/60 border border-emerald-500/20 text-emerald-400 text-xs font-black font-gaming tracking-widest rounded mb-3 uppercase">COMPLIANCE</div>
+                <p class="text-3xl sm:text-5xl font-black text-white tracking-tight">安全なマルチプレイのための利用規約</p>
+            </div>
+
+            <!-- サイバーテイストのアコーディオンリスト -->
+            <div class="space-y-5">
+                <div class="bg-[#090f1d]/80 border border-gray-900 rounded-2xl overflow-hidden shadow-xl transition-colors duration-300 hover:border-emerald-500/20">
+                    <button class="w-full text-left p-6 font-bold text-lg text-white flex items-center justify-between hover:bg-emerald-500/5 transition-colors focus:outline-none rule-toggle">
+                        <span class="flex items-center gap-3">
+
+                            <span class="text-emerald-400 font-gaming">01/</span> 荒らし行為および不当な窃盗の全面禁止
+                        </span>
+                        <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="p-6 pt-2 border-t border-gray-900/50 text-gray-400 text-sm leading-relaxed font-medium rule-content hidden bg-black/20">
+                        他者が構築した建築の無断改変・解体、保護外チェストからの物資強奪は一切認められません。全アクションは運営ログに紐付いており、検知され次第即時に永続BAN処分となります。
+                    </div>
+                </div>
+
+                <div class="bg-[#090f1d]/80 border border-gray-900 rounded-2xl overflow-hidden shadow-xl transition-colors duration-300 hover:border-emerald-500/20">
+                    <button class="w-full text-left p-6 font-bold text-lg text-white flex items-center justify-between hover:bg-emerald-500/5 transition-colors focus:outline-none rule-toggle">
+                        <span class="flex items-center gap-3">
+                            <span class="text-emerald-400 font-gaming">02/</span> 不正クライアント・外部ハックMODの禁止
+                        </span>
+                        <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="p-6 pt-2 border-t border-gray-900/50 text-gray-400 text-sm leading-relaxed font-medium rule-content hidden bg-black/20">
+                        透過モジュール(X-Ray)、スピードハック、フライトツール、ゲーム側の脆弱性を利用したアイテム増殖(グリッチ)行為を固く禁じます。公平なゲームプレイをお守りください。
+                    </div>
+
+                </div>
+
+                <div class="bg-[#090f1d]/80 border border-gray-900 rounded-2xl overflow-hidden shadow-xl transition-colors duration-300 hover:border-emerald-500/20">
+                    <button class="w-full text-left p-6 font-bold text-lg text-white flex items-center justify-between hover:bg-emerald-500/5 transition-colors focus:outline-none rule-toggle">
+                        <span class="flex items-center gap-3">
+                            <span class="text-emerald-400 font-gaming">03/</span> チャットモラルとマナーの維持
+                        </span>
+                        <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="p-6 pt-2 border-t border-gray-900/50 text-gray-400 text-sm leading-relaxed font-medium rule-content hidden bg-black/20">
+                        ゲーム内グローバルチャットやコミュニティボード上での暴言、個人に対する煽り、ヘイトスピーチ、過度なスパム送信は禁止です。他プレイヤーへの敬意を忘れないでください。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特設コンテンツ・外部リンクセクション (洗練されたスタイリッシュデザイン) -->
+    <section id="links" class="py-28 bg-[#060913] border-t border-gray-900/60">
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <div class="inline-block px-3 py-1 bg-emerald-950/60 border border-emerald-500/20 text-emerald-400 text-xs font-black font-gaming tracking-widest rounded mb-3 uppercase">CREATIVE CONTEXTS</div>
+                <p class="text-3xl sm:text-5xl font-black text-white tracking-tight">Mai管理者制作のスペシャルガジェット</p>
+                <p class="text-gray-400 text-sm mt-3 font-medium">管理者自らが開発・執筆した独自の特設コンテンツ群です。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                <!-- 電卓カード (ホバー演出超強化) -->
+                <a href="https://github.io" target="_blank" rel="noopener noreferrer" class="block p-8 bg-gradient-to-br from-[#0c1328] to-[#080d1a] border border-gray-900 rounded-3xl hover:border-emerald-500/40 shadow-2xl transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl group-hover:bg-emerald-500/10 transition-colors"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="p-3 bg-emerald-950/80 rounded-xl border border-emerald-500/20 text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <span class="text-[10px] font-black font-gaming text-emerald-400 bg-emerald-950/60 border border-emerald-500/20 px-2.5 py-1 rounded">WEB TOOL</span>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors flex items-center gap-2">
+                        特設Web電卓ツール
+                        <svg class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </h3>
+                    <p class="text-gray-400 text-sm leading-relaxed font-medium">
+                        Mai氏が「暇だから作ってやったw」と語る、ユーザー間でも非常に完成度が高いと絶賛されている多機能Web電卓システムです。
+                    </p>
+                </a>
+
+                <!-- 小説カード -->
+                <div class="p-8 bg-gradient-to-br from-[#0c1328] to-[#080d1a] border border-gray-900 rounded-3xl shadow-2xl relative overflow-hidden">
+                    <span class="absolute top-4 right-4 px-2.5 py-1 bg-gray-950 text-cyan-400 border border-cyan-500/20 text-[10px] font-black font-gaming rounded uppercase tracking-wider">LITERATURE</span>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="p-3 bg-cyan-950/80 rounded-xl border border-cyan-500/20 text-cyan-400">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white mb-3">管理者オリジナル小説</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed font-medium">
+                        Mai氏が創作した「小説作った⭐w」と紹介されるオリジナルストーリーコンテンツ。サーバーの世界観やコミュニティ向けに配信中です。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- コミュニティ（交流広場） -->
+    <section id="community" class="py-28 bg-gradient-to-b from-[#060913] to-[#03050a] relative overflow-hidden border-t border-gray-900/40">
+        <div class="absolute inset-0 z-0 opacity-5 filter grayscale contrast-200">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31" alt="Server Background" class="w-full h-full object-cover">
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-b from-[#0b1226]/90 to-[#060a14]/90 border border-emerald-500/10 p-8 sm:p-16 rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.8)] backdrop-blur-md relative">
+                <div class="absolute inset-0 bg-emerald-500/[0.01] pointer-events-none rounded-3xl"></div>
+                <div class="w-16 h-16 mx-auto bg-emerald-950 text-emerald-400 rounded-2xl flex items-center justify-center mb-8 border border-emerald-500/20 shadow-inner shadow-black">
+
+                    <svg class="w-8 h-8 neon-text-emerald" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                    </svg>
+                </div>
+                
+                <h2 class="text-3xl sm:text-4xl font-black text-white mb-6">OFFICIAL PLAYER RADAR</h2>
+                <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto mb-10 leading-relaxed font-medium">
+                    最新のシステムアップデート告知、プレイヤー間トレードの相談、不適切な荒らし報告、及び管理者Mai氏へのダイレクトなコンタクトは公式交流ラウンジへ集約されています。
+                </p>
+                <a href="https://maimodserver.1my.jp/#id109146" target="_blank" rel="noopener noreferrer" class="relative group inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black font-gaming text-sm tracking-widest rounded-xl transition-all duration-300 shadow-xl shadow-emerald-500/10 hover:shadow-emerald-500/30 hover:scale-105 active:scale-95">
+                    <span class="relative z-10 flex items-center gap-2">
+                        ENTER DISCUSSIONS
+                        <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="bg-[#03050a] text-gray-600 py-16 border-t border-gray-900/80 text-center text-sm font-medium tracking-wide">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <div class="flex justify-center space-x-8 text-gray-400 font-gaming text-xs tracking-widest">
+                <a href="#about" class="hover:text-emerald-400 transition-colors">OVERVIEW</a>
+                <a href="#rules" class="hover:text-emerald-400 transition-colors">COMPLIANCE</a>
+                <a href="#links" class="hover:text-emerald-400 transition-colors">UTILITIES</a>
+            </div>
+            <p class="max-w-md mx-auto text-[11px] text-gray-500/60 leading-relaxed">
+                当サーバーおよびWebサイトは、Minecraftの公式開発元であるMojang StudiosおよびMicrosoft社とは一切関係がありません。
+            </p>
+            <p class="font-gaming text-xs tracking-widest text-emerald-500/40">
+                &copy; 2026 maimodserver (nomod). CONNECTED WITH SUPREME MATRIX.
+            </p>
+        </div>
+    </footer>
+
+
+    <!-- JavaScript ロジック -->
+    <script>
+        // モバイルナビゲーションの開閉
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // アドレスコピー機能
+        const copyBtn = document.getElementById('copy-btn');
+
+        const serverIpText = document.getElementById('server-ip').innerText;
+        const copyTextSpan = document.getElementById('copy-text');
+
+        copyBtn.addEventListener('click', () => {
+            const tempTextarea = document.createElement('textarea');
+            tempTextarea.value = serverIpText;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            
+            try {
+                document.execCommand('copy');
+                copyTextSpan.innerText = 'COPIED!';
+                copyBtn.classList.remove('from-emerald-600', 'to-teal-600');
+                copyBtn.classList.add('from-cyan-600', 'to-blue-600');
+                
+                setTimeout(() => {
+                    copyTextSpan.innerText = 'COPY IP';
+                    copyBtn.classList.remove('from-cyan-600', 'to-blue-600');
+                    copyBtn.classList.add('from-emerald-600', 'to-teal-600');
+
+                }, 2000);
+            } catch (err) {
+                copyTextSpan.innerText = 'FAILED';
+            }
+            
+            document.body.removeChild(tempTextarea);
+        });
+
+        // 利用規約のアコーディオン
+        const ruleToggles = document.querySelectorAll('.rule-toggle');
+        ruleToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('svg');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+    </script>
+</body>
+</html>
+
+
