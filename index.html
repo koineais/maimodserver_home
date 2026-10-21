@@ -1,568 +1,476 @@
-# maimodserver (nomod) 独自開発未来公式サイト
+# maimodserver (nomod) 配置・レイアウト全面刷新ウェブサイト
 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>maimodserver (nomod) Future Matrix | 公式サイト</title>
+    <title>maimodserver (nomod) | Minecraft独自開発サーバー 公式サイト</title>
     <!-- Tailwind CSS (許可ドメイン) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- マイクラ独特のドットフォント(Press Start 2P)と読みやすいNoto Sans、Oswaldのブレンド -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Press+Start+2P&family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
+        /* -----------------------------------------
+           Minecraft Perfect Pixel & Font Styles
+        ----------------------------------------- */
         body {
             font-family: 'Noto Sans JP', sans-serif;
-            background-color: #030712;
-            transition: background-color 1.5s ease, color 1.5s ease;
-        }
-        .font-gaming {
 
-            font-family: 'Orbitron', sans-serif;
+            /* マイクラのブロック質感をコードで再現したピクセルグリッド背景 */
+            background-color: #1a1a1a;
+            background-image: 
+                linear-gradient(45deg, #141414 25%, transparent 25%, transparent 75%, #141414 75%, #141414), 
+                linear-gradient(45deg, #141414 25%, transparent 25%, transparent 75%, #141414 75%, #141414);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+            color: #ffffff;
+            image-rendering: pixelated;
         }
+
+        /* マイクラ独特のドット絵フォントを適用するクラス */
+        .font-minecraft-pixel {
+            font-family: 'Press Start 2P', cursive;
+            letter-spacing: -0.05em;
+        }
+        
+        .font-official-title {
+            font-family: 'Oswald', sans-serif;
+
+            letter-spacing: 0.05em;
+        }
+
         html {
             scroll-behavior: smooth;
         }
 
-        /* -----------------------------------------
-           Futuristic Matrix Animations & Effects 
-        ----------------------------------------- */
-        @keyframes grid-travel {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(4rem); }
+        /* 完璧に再現した公式の「緑色」ピクセルボタン */
+        .official-btn-green {
+            background-color: #5cbf26;
+            border-bottom: 5px solid #235c0b;
+            border-right: 5px solid #235c0b;
+            border-top: 5px solid #82eb4b;
+            border-left: 5px solid #82eb4b;
+            font-weight: 700;
+            transition: all 0.05s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
-        .cyber-grid {
-            background-image: 
-                linear-gradient(to right, rgba(6, 182, 212, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(6, 182, 212, 0.04) 1px, transparent 1px);
-            background-size: 4rem 4rem;
-            animation: grid-travel 3s linear infinite;
+        .official-btn-green:hover {
 
-            transition: background-image 1.5s ease;
+            background-color: #63cc29;
+            border-top-color: #92f55c;
+            border-left-color: #92f55c;
         }
-
-        @keyframes neon-flicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-                text-shadow: 0 0 12px rgba(6, 182, 212, 0.7), 0 0 25px rgba(6, 182, 212, 0.4);
-                opacity: 1;
-            }
-            20%, 24%, 55% {
-                text-shadow: none;
-                opacity: 0.6;
-            }
-        }
-        .animate-flicker {
-            animation: neon-flicker 5s infinite;
+        .official-btn-green:active {
+            transform: translateY(3px) translateX(1px);
+            border-bottom-width: 2px;
+            border-right-width: 2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        @keyframes slow-spin {
-            0% { transform: rotate(0deg) translate(-50%, -50%); }
+        /* 公式の「グレー」サブボタン */
+        .official-btn-gray {
+            background-color: #4a4a4a;
+            border-bottom: 5px solid #212121;
+            border-right: 5px solid #212121;
+            border-top: 5px solid #6e6e6e;
+            border-left: 5px solid #6e6e6e;
+            font-weight: 700;
 
-            100% { transform: rotate(360deg) translate(-50%, -50%); }
+            transition: all 0.05s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
-        .glow-orb {
-            transform-origin: top left;
-            animation: slow-spin 30s linear infinite;
-            transition: background-color 1.5s ease, filter 1.5s ease;
+        .official-btn-gray:hover {
+            background-color: #545454;
         }
-
-        .neon-text-emerald {
-            text-shadow: 0 0 10px rgba(16, 185, 129, 0.6), 0 0 20px rgba(16, 185, 129, 0.2);
-            transition: text-shadow 1.5s ease, color 1.5s ease;
-        }
-        .neon-text-cyan {
-            text-shadow: 0 0 12px rgba(6, 182, 212, 0.6), 0 0 24px rgba(6, 182, 212, 0.3);
-            transition: text-shadow 1.5s ease;
-        }
-
-        /* 未来感のあるデジタルボーダーライン */
-        .cyber-border {
-
-            position: relative;
-        }
-        .cyber-border::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #06b6d4, #10b981, transparent);
+        .official-btn-gray:active {
+            transform: translateY(3px) translateX(1px);
+            border-bottom-width: 2px;
+            border-right-width: 2px;
         }
 
-        /* スムースなスクロールバーデザイン */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #030712; }
-        ::-webkit-scrollbar-thumb {
-            background: #111827;
-            border-radius: 3px;
-            border: 1px solid rgba(6, 182, 212, 0.2);
+        /* 公式のニュースフィードやコンテンツ枠を模した、角張った硬質なピクセルコンテナ */
+        .official-card {
+            background-color: #2e2e2e;
+            border: 4px solid #151515;
+            box-shadow: inset -4px -4px 0px #1c1c1c, inset 4px 4px 0px #444444, 0 10px 25px rgba(0,0,0,0.6);
+        }
 
+
+        /* スムースなスクロールバー */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #141414; }
+        ::-webkit-scrollbar-thumb { 
+            background: #4a4a4a; 
+            border: 2px solid #141414;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #06b6d4;
-            box-shadow: 0 0 12px rgba(6, 182, 212, 0.8);
-        }
+        ::-webkit-scrollbar-thumb:hover { background: #5cbf26; }
 
         /* -----------------------------------------
-           Horror Mode Overlay & Override Classes (Virus Threat Mode)
+           Horror Mode (Deep Dark / Sculk Overgrowth)
         ----------------------------------------- */
         #horror-overlay {
             position: fixed;
             inset: 0;
             z-index: 9999;
             pointer-events: none;
-            background: radial-gradient(circle, transparent 20%, rgba(10, 0, 0, 0.95) 100%);
+            background: radial-gradient(circle, transparent 20%, #000104 100%);
             opacity: 0;
+
             transition: opacity 2s ease;
         }
 
-
         body.horror-mode {
-            background-color: #0b0101 !important;
-            color: #714a4a !important;
+            background-color: #00060d !important;
+            background-image: 
+                linear-gradient(45deg, #010f1c 25%, transparent 25%, transparent 75%, #010f1c 75%, #010f1c), 
+                linear-gradient(45deg, #010f1c 25%, transparent 25%, transparent 75%, #010f1c 75%, #010f1c) !important;
+            background-size: 32px 32px !important;
+            background-position: 0 0, 16px 16px !important;
         }
         body.horror-mode #horror-overlay { opacity: 1; }
-        body.horror-mode .cyber-grid {
-            background-image: 
-                linear-gradient(to right, rgba(239, 68, 68, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(239, 68, 68, 0.05) 1px, transparent 1px);
+
+        body.horror-mode nav,
+        body.horror-mode .bg-\[\#242424\] {
+            background-color: #021224 !important;
+            border-bottom-color: #010814 !important;
+        }
+        
+
+        body.horror-mode h1,
+        body.horror-mode h2,
+        body.horror-mode h3,
+        body.horror-mode .text-white,
+        body.horror-mode .text-green-400 {
+            color: #00ffcc !important;
+            text-shadow: 0 0 12px rgba(0, 255, 204, 0.7) !important;
         }
 
-        body.horror-mode .neon-text-emerald, 
-        body.horror-mode .neon-text-cyan,
-        body.horror-mode .animate-flicker {
-            color: #ef4444 !important;
-            text-shadow: 0 0 15px rgba(239, 68, 68, 0.9), 0 0 30px rgba(185, 28, 28, 0.8) !important;
-            animation: neon-flicker 0.3s infinite !important;
+        body.horror-mode .text-zinc-100,
+        body.horror-mode .text-zinc-300,
+        body.horror-mode .text-zinc-400 {
+            color: #3d6a73 !important;
         }
 
+        body.horror-mode .official-card {
+            background-color: #01182e !important;
+            border-color: #00ffcc !important;
+            box-shadow: inset -4px -4px 0px #010e1c, inset 4px 4px 0px #032b4f !important;
 
-        body.horror-mode .glow-orb {
-            background-color: rgba(220, 38, 38, 0.15) !important;
-            filter: blur(90px) !important;
         }
 
-        body.horror-mode nav {
-            background-color: rgba(11, 1, 1, 0.95) !important;
-            border-color: rgba(239, 68, 68, 0.25) !important;
+        body.horror-mode .official-btn-green,
+        body.horror-mode .official-btn-gray {
+            background-color: #032b38 !important;
+            border-color: #00ffcc !important;
+            text-shadow: none !important;
+            color: #00ffcc !important;
+            box-shadow: 0 0 15px rgba(0,255,204,0.3) !important;
         }
-        body.horror-mode .bg-gradient-to-b, 
-        body.horror-mode .bg-\[\#090f1d\]\/60,
-        body.horror-mode .bg-gray-950\/80,
-        body.horror-mode .accordion-item,
-        body.horror-mode .feature-card {
-            background: #1c0606 !important;
-            border-color: rgba(239, 68, 68, 0.25) !important;
-            box-shadow: 0 0 30px rgba(239, 68, 68, 0.06) !important;
-        }
-
 
         body.horror-mode img {
-            filter: brightness(20%) sepia(100%) hue-rotate(-55deg) saturate(300%) !important;
+            filter: brightness(10%) sepia(100%) hue-rotate(145deg) saturate(300%) !important;
         }
     </style>
 </head>
-<body class="text-gray-200 overflow-x-hidden selection:bg-cyan-500 selection:text-white">
+<body class="overflow-x-hidden selection:bg-green-700 selection:text-white antialiased">
 
-    <!-- ホラーモード用フィルム層 -->
+    <!-- ホラーモード用レイヤー -->
+
     <div id="horror-overlay"></div>
 
-    <!-- ナビゲーションバー -->
-    <nav class="fixed top-0 left-0 w-full z-50 bg-[#030712]/80 backdrop-blur-lg border-b border-cyan-500/10 shadow-lg shadow-black/40 transition-all duration-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center">
-                    <a href="#" class="flex items-center gap-3 group">
-                        <span class="text-2xl font-black font-gaming tracking-widest text-cyan-400 transition-all duration-300 group-hover:text-cyan-300 neon-text-cyan">maimodserver</span>
-                        <span class="px-2.5 py-0.5 text-[10px] font-black font-gaming bg-gray-950 text-cyan-400 rounded-md border border-cyan-500/30 uppercase tracking-widest group-hover:border-cyan-400 transition-colors duration-300">future matrix</span>
-                    </a>
+    <!-- トップ細帯告知バー -->
+    <div class="w-full bg-[#141414] border-b-2 border-zinc-800 text-[10px] text-zinc-400 font-bold tracking-wider py-1.5 px-4 flex justify-between items-center z-50 relative">
+        <div class="flex items-center gap-4 mx-auto lg:mx-0">
+            <span class="font-minecraft-pixel text-[8px] text-green-400">JAVA & BEDROCK COMPATIBLE</span>
+            <span class="hidden lg:inline text-zinc-700">|</span>
+            <span class="hidden lg:inline font-minecraft-pixel text-[8px]">NO MODS REQUIRED</span>
+        </div>
+        <div class="hidden lg:block text-zinc-500 font-mono text-[10px]">CORE: 1.21.X</div>
+    </div>
 
+    <!-- 公式完全再現ナビゲーションバー -->
+    <nav class="sticky top-0 left-0 w-full z-50 bg-[#242424] border-b-4 border-[#151515] shadow-2xl transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-14">
+                <div class="flex items-center gap-6">
+                    <a href="#" class="flex items-center gap-2 py-2">
+                        <span class="text-lg font-black font-official-title tracking-widest text-white sm:text-xl">MINECRAFT</span>
+
+                        <span class="text-[8px] bg-[#5cbf26] text-white font-bold px-1.5 py-0.5 rounded-none font-minecraft-pixel">SERVER</span>
+                    </a>
                 </div>
                 
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="#about" class="text-gray-400 hover:text-cyan-400 font-medium tracking-wide transition-all duration-300 text-sm hover:-translate-y-0.5">MATRIX OVERVIEW</a>
-                    <a href="#features" class="text-gray-400 hover:text-cyan-400 font-medium tracking-wide transition-all duration-300 text-sm hover:-translate-y-0.5">SECTORS</a>
-                    <a href="#rules" class="text-gray-400 hover:text-cyan-400 font-medium tracking-wide transition-all duration-300 text-sm hover:-translate-y-0.5">DIRECTIVES / 規約</a>
-                    
-                    <!-- YouTube -->
-                    <a href="https://m.youtube.com/channel/UCc5VOp97rYiQFM9ABhKUS1w/videos?ra=m" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-red-400 font-bold tracking-wide transition-all duration-300 text-sm flex items-center gap-1.5 group hover:-translate-y-0.5">
-                        <svg class="w-4 h-4 text-red-500 group-hover:scale-120 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                        </svg>
-                        YOUTUBE
+                <!-- モバイル用コミュニティボタン（ナビゲーション内設置） -->
+                <div class="flex items-center lg:hidden">
+                    <a href="https://maimodserver.1my.jp/#id109146" target="_blank" rel="noopener noreferrer" class="official-btn-green text-white text-[8px] px-3 py-1.5 font-minecraft-pixel">
+                        COMMUNITY
                     </a>
-
-                    <a href="https://maimodserver.1my.jp/#id109146" target="_blank" rel="noopener noreferrer" class="relative group overflow-hidden bg-gradient-to-r from-cyan-600 to-emerald-600 text-white px-5 py-2 rounded-lg text-sm font-bold tracking-wider transition-all duration-300 hover:scale-105 shadow-lg shadow-cyan-500/20">
-                        <span class="relative z-10 font-gaming text-xs tracking-widest">COMMUNITY</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </a>
-
-                </div>
-
-                <!-- モバイルメニューボタン -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-400 hover:text-white focus:outline-none transition-transform duration-300 active:scale-90" aria-label="Toggle Menu">
-                        <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
                 </div>
             </div>
-        </div>
-        <!-- モバイルメニュー -->
-        <div id="mobile-menu" class="hidden md:hidden bg-[#050b18]/95 backdrop-blur-xl border-b border-cyan-500/20 px-6 pt-4 pb-6 space-y-3 shadow-2xl transition-all duration-300">
-            <a href="#about" class="block hover:text-cyan-400 py-2 rounded-md font-medium tracking-wide transition-colors">MATRIX OVERVIEW</a>
-            <a href="#features" class="block hover:text-cyan-400 py-2 rounded-md font-medium tracking-wide transition-colors">SECTORS</a>
-            <a href="#rules" class="block hover:text-cyan-400 py-2 rounded-md font-medium tracking-wide transition-colors">DIRECTIVES / 規約</a>
-            <a href="https://m.youtube.com/channel/UCc5VOp97rYiQFM9ABhKUS1w/videos?ra=m" target="_blank" rel="noopener noreferrer" class="block hover:text-red-400 py-2 rounded-md font-medium tracking-wide text-red-500 transition-colors">OFFICIAL YOUTUBE</a>
-            <a href="https://maimodserver.1my.jp/#id109146" target="_blank" rel="noopener noreferrer" class="block bg-gradient-to-r from-cyan-600 to-emerald-600 text-center text-white py-3 rounded-lg font-bold tracking-widest shadow-lg shadow-cyan-500/20">JOIN COMMUNITY</a>
-
         </div>
     </nav>
 
-    <!-- ヒーローセクション -->
-    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div class="absolute inset-0 z-0 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1697479670670-d2a299df749c" alt="Minecraft Futuristic Blur" class="w-full h-full object-cover opacity-10 filter scale-105 contrast-150 brightness-50 transition-transform duration-10000 ease-out hover:scale-110">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/50 to-transparent"></div>
-            <div class="absolute inset-0 cyber-grid"></div>
-        </div>
-
-        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center sm:px-6 lg:px-8">
-            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-cyan-400 text-xs sm:text-sm font-black font-gaming tracking-widest mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.15)]">
-                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,1)] animate-ping"></span>
-                STABLE OWNED GRID ACTIVE
-            </div>
-
-            <h1 class="text-4xl sm:text-7xl lg:text-8xl font-black font-gaming tracking-tighter text-white mb-6 uppercase transition-all duration-300 transform hover:scale-[1.01]">
-                maimodserver<br class="sm:hidden"><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 neon-text-cyan animate-flicker"> (nomod)</span>
-
-            </h1>
+    <!-- 新配置：2カラム・ダッシュボード型メインレイアウト -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:items-start">
             
-            <!-- 日英並記テキスト -->
-            <div class="max-w-3xl mx-auto mb-12 space-y-4">
-                <p class="text-base sm:text-xl text-gray-300 leading-relaxed font-medium">
-                    チート完全禁止、公平性を極めたクリーンな世界。独自開発のインフラから最先端のサバイバル＆ミニゲームへ即座にダイブ。
-                </p>
-                <p class="text-sm sm:text-base text-gray-500 font-mono tracking-wide">
-                    Strictly No Cheats. Formulated on a custom proprietary cloud infrastructure. Connect instantly to survival & elite minigames.
-                </p>
-            </div>
+            <!-- 【左カラム：3割】 常時目を引くサーバーインフォメーション＆アクセス固定エリア -->
 
-            <!-- コピーコンテナ -->
-            <div class="max-w-lg mx-auto bg-gray-950/90 p-2.5 rounded-2xl border border-cyan-500/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] flex flex-col sm:flex-row items-center gap-3 mb-16 backdrop-blur-md group hover:border-cyan-500/50 hover:shadow-[0_0_35px_rgba(6,182,212,0.2)] transition-all duration-500">
-                <div class="flex items-center justify-between w-full px-4 py-3 bg-black/70 rounded-xl border border-gray-900 text-left overflow-x-auto transition-colors group-hover:border-gray-800">
-                    <div class="flex flex-col">
-                        <span class="text-[9px] uppercase font-black font-gaming tracking-widest text-cyan-400/80">コア接続アドレス / PROPRIETARY ACCESS IP</span>
-                        <span id="server-ip" class="text-base sm:text-lg font-mono font-bold text-gray-100 tracking-wide select-all">maimodserver.aternos.me</span>
+            <aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
+                <div class="official-card p-6 bg-[#262626]">
+                    <div class="text-center space-y-4">
+                        <div class="inline-block px-2.5 py-1 bg-black/40 text-green-400 text-[8px] font-minecraft-pixel border border-green-500/20">
+                            INFRA INTEGRITY
+                        </div>
+                        
+                        <h1 class="text-2xl sm:text-4xl font-black font-official-title tracking-tight text-white uppercase leading-none">
+                            maimodserver<br>
+                            <span class="text-[#5cbf26] text-xs sm:text-lg font-minecraft-pixel block mt-2 normal-case tracking-normal">(nomod)</span>
+                        </h1>
+                        
+                        <hr class="border-zinc-700">
+
+                        <!-- クイックIPコピーボックス -->
+                        <div class="bg-black p-3 border-2 border-zinc-900 text-left space-y-2">
+                            <span class="text-[8px] font-minecraft-pixel text-green-400 block">SERVER ADDRESS</span>
+                            <span id="server-ip" class="text-xs font-mono font-bold text-zinc-100 tracking-wide block select-all break-all">maimodserver.aternos.me</span>
+                            <button id="copy-btn" class="w-full official-btn-green text-white text-[9px] py-2.5 font-minecraft-pixel uppercase tracking-wider block mt-2">
+
+                                <span id="copy-text">COPY IP</span>
+                            </button>
+                        </div>
                     </div>
-
                 </div>
-                <button id="copy-btn" class="w-full sm:w-auto px-6 py-4 bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white font-black font-gaming text-sm tracking-widest rounded-xl transition-all duration-300 shadow-lg active:scale-95 flex items-center justify-center gap-2.5 whitespace-nowrap">
-                    <svg class="w-5 h-5 text-cyan-200 transition-transform duration-300 group-hover:rotate-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                    </svg>
-                    <span id="copy-text" class="transition-all duration-300">COPY IP</span>
-                </button>
-            </div>
 
-            <div class="mt-4">
-                <a href="#about" class="inline-block text-cyan-500/40 hover:text-cyan-400 transition-colors duration-300 animate-bounce" aria-label="Scroll Down">
-                    <svg class="w-8 h-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </header>
-
-
-    <!-- サーバーの概要セクション -->
-    <section id="about" class="py-28 bg-[#02050c] border-t border-gray-900/60 relative overflow-hidden">
-        <div class="absolute w-96 h-96 bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none glow-orb left-10 top-10"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="w-6 h-[2px] bg-cyan-500 animate-pulse"></span>
-                        <h2 class="text-xs uppercase font-black tracking-widest text-cyan-400 font-gaming">PROPRIETARY CORE / 自社コア開発</h2>
+                <!-- グラフィックバナーカード -->
+                <div class="official-card p-2">
+                    <div class="relative overflow-hidden aspect-video border-2 border-zinc-900">
+                        <img src="https://images.unsplash.com/photo-1697479670670-d2a299df749c" alt="Minecraft Landscape Art" class="w-full h-full object-cover filter brightness-[0.4] contrast-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-3 left-3 right-3 text-[9px] font-minecraft-pixel text-green-400">
+                            ■ VANILLA READY
+                        </div>
                     </div>
+                </div>
+            </aside>
+
+            <!-- 【右カラム：7割】 スムーズにスクロールして読み進めるメインコンテンツエリア -->
+
+            <main class="lg:col-span-8 space-y-12">
+                
+                <!-- セクション 1: 概要（GAMES / OVERVIEW） -->
+                <section id="overview" class="official-card p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-2 h-6 bg-[#5cbf26]"></div>
+                        <h2 class="text-xl sm:text-2xl font-black text-white font-minecraft-pixel uppercase">GAMES / 概要</h2>
+                    </div>
+
+                    <!-- 日英並記のリードコンテナ -->
+                    <div class="bg-black/30 p-4 border-2 border-zinc-800 space-y-2">
+                        <p class="text-xs sm:text-sm text-zinc-100 font-bold leading-relaxed">
+                            チート完全禁止、公平性を極めたクリーンな世界。バニラ環境のままで、最高峰のサバイバルとスリリングなミニゲームへ。
+                        </p>
+                        <p class="text-[11px] text-zinc-400 font-mono tracking-wide leading-relaxed">
+                            Strictly No Cheats. Experience a perfectly clean gameplay space. Dive directly into custom minigames & multi-survival networks with a standard vanilla client.
+                        </p>
+                    </div>
+
+
+                    <h3 class="text-lg font-bold text-zinc-300 font-official-title uppercase">PROPRIETARY HOSTED ENVIRONMENT / 管理者 Mai 独自設計コア</h3>
                     
-                    <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4 leading-tight">
-                        管理者 <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 font-gaming">Mai</span> がフルスクラッチで<br>ビルドした最高水準のネットワーク
-                    </h2>
-                    <p class="text-sm sm:text-base text-gray-500 font-mono uppercase tracking-wider mb-8">
-                        The elite network infrastructure fully engineered and hosted by Leader <span class="text-cyan-400">Mai</span>
-                    </p>
-
-
-                    <div class="space-y-8 text-gray-400 leading-relaxed font-medium border-l-2 border-cyan-500/20 pl-4">
-                        <div>
-                            <p class="text-gray-200">「maimodserver (nomod)」は、既製のレンタルサーバーに依存せず、独自の高度なインフラストラクチャ上でゼロから開発されたプレミアムスペースです。</p>
-                            <p class="text-sm text-gray-500 mt-1">Built entirely from scratch on a proprietary custom cloud infrastructure. Experience high-response, lag-free premium multi-networks.</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-200">最適化されたパケット処理エンジンと強固な自動不正検知により、チート行為を徹底排除。王道サバイバルと競技用ミニゲームをシームレスに行き来できる、完全自社設計のゲーム環境を提供します。</p>
-                            <p class="text-sm text-gray-500 mt-1">Our clean-code matrix ensures maximum safety against clients. Move natively between custom arenas and infinite survival coordinates.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative rounded-3xl overflow-hidden border border-cyan-500/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] group transition-all duration-500 hover:border-cyan-500/30">
-                    <img src="https://images.unsplash.com/photo-1760114333167-7f254ca9f3c4" alt="Futuristic Gameplay Concept" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 filter brightness-95">
-                    <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-80"></div>
-                    <div class="absolute bottom-6 left-6 right-6 p-6 bg-black/80 backdrop-blur-md rounded-xl border border-white/5">
-                        <span class="text-[10px] font-black font-gaming text-cyan-400 tracking-wider block mb-1">OWNED HOSTING CORE</span>
-                        <p class="text-xs text-gray-200 font-bold">バックグラウンドで稼働する、自作のアンチチートマトリックスが24時間すべての不正データを検知・遮断します。</p>
-                        <p class="text-[11px] text-gray-500 mt-0.5">Proprietary inspection code tracks and intercepts external anomalies to safeguard core player metrics around the clock.</p>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 特徴・機能セクション -->
-    <section id="features" class="py-28 bg-[#030712] relative overflow-hidden">
-        <div class="absolute w-96 h-96 bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none glow-orb right-10 bottom-10"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-20">
-                <div class="inline-block px-3 py-1 bg-cyan-955/60 border border-cyan-500/20 text-cyan-400 text-xs font-black font-gaming tracking-widest rounded mb-3 uppercase animate-pulse">SECTOR ARCHITECTURE</div>
-                <p class="text-3xl sm:text-5xl font-black text-white tracking-tight">サーバーの二大セクター ＆ 限定特典</p>
-                <p class="text-sm sm:text-base text-gray-500 font-mono mt-2">Core Ecosystem & Tactical Multipliers</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- セクター1: サバイバル -->
-
-                <div class="feature-card bg-[#090f1d]/50 p-8 rounded-3xl border border-gray-900 hover:border-cyan-500/40 hover:shadow-[0_0_35px_rgba(6,182,212,0.15)] hover:bg-[#0c1426]/70 transition-all duration-500 group hover:-translate-y-2">
-                    <div class="w-14 h-14 rounded-2xl bg-gray-950 flex items-center justify-center text-cyan-400 mb-8 border border-gray-900 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-500">
-                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2.5M14 22c0-5.523-4.477-10-10-10z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-300">王道マルチサバイバル・セクター</h3>
-                    <h3 class="text-xs font-mono text-cyan-500/80 mb-4 uppercase tracking-wider">Advanced Survival Sector</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-2">
-                        広大でどこまでも美しいバニラの大地を、信頼できる仲間と共に開拓。独自設計の拠点保護システム完備で、大切な建築を安全に拡張できます。
-                    </p>
-                    <p class="text-gray-500 text-xs leading-relaxed">
-                        Expand borders within massive protected zones. Secure storage networks prevent building corruption or element loss seamlessly.
-                    </p>
-                </div>
-
-                <!-- セクター2: ミニゲーム -->
-                <div class="feature-card bg-[#090f1d]/50 p-8 rounded-3xl border border-gray-900 hover:border-emerald-500/40 hover:shadow-[0_0_35px_rgba(16,185,129,0.15)] hover:bg-[#0c1426]/70 transition-all duration-500 group hover:-translate-y-2">
-                    <div class="w-14 h-14 rounded-2xl bg-gray-950 flex items-center justify-center text-emerald-400 mb-8 border border-gray-900 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-500">
-
-                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-300">高応答設計ミニゲーム・アリーナ</h3>
-                    <h3 class="text-xs font-mono text-emerald-500/80 mb-4 uppercase tracking-wider">Elite Minigames Arena</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-2">
-                        PVP、アスレチック、各種エキサイティングなミニゲーム専用ステージを実装。チートのいない完全に公平な独自の競技環境を楽しめます。
-                    </p>
-                    <p class="text-gray-500 text-xs leading-relaxed">
-                        Engineered tactical match stages. Test skill mechanics in high-performance custom minigames unburdened by modified clients.
-                    </p>
-                </div>
-
-                <!-- セクター3: 夜間特典 -->
-                <div class="feature-card bg-gradient-to-b from-[#0b1b2b] to-[#05111c] p-8 rounded-3xl border border-cyan-500/30 shadow-[0_0_30px_rgba(6,182,212,0.05)] hover:border-cyan-400 hover:shadow-[0_0_40px_rgba(6,182,212,0.25)] transition-all duration-500 group hover:-translate-y-2 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-gradient-to-l from-cyan-500 to-emerald-600 text-white px-4 py-1.5 text-[10px] font-black font-gaming tracking-wider uppercase">QUANTUM SYNC</div>
-                    <div class="w-14 h-14 rounded-2xl bg-cyan-950/80 flex items-center justify-center text-cyan-400 mb-8 border border-cyan-500/30 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-500">
-                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-6.646z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-300">夜間接続の限定インセンティブ</h3>
-                    <h3 class="text-xs font-mono text-cyan-400/80 mb-4 uppercase tracking-wider">Nighttime Connection Bonus</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-2">
-                        当サーバー伝統の<strong>夜の時間帯に来ると嬉しい特典</strong>システム！独自のコア同期処理により、夜間のログインへ自動でインセンティブを付与します。
-                    </p>
-                    <p class="text-gray-500 text-xs leading-relaxed">
-                        The matrix triggers specialized connection multipliers during nighttime hours, instantly boosting your resource collection.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 利用規約（ルール）セクション -->
-    <section id="rules" class="py-28 bg-[#02050c] border-t border-gray-900/60 relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <div class="text-center mb-20">
-                <div class="inline-block px-3 py-1 bg-cyan-955/60 border border-cyan-500/20 text-cyan-400 text-xs font-black font-gaming tracking-widest rounded mb-3 uppercase animate-pulse">COMPLIANCE PROTOCOLS</div>
-                <p class="text-3xl sm:text-5xl font-black text-white tracking-tight">安全・クリーンな環境を守る未来憲章</p>
-                <p class="text-sm sm:text-base text-gray-500 font-mono mt-1">Core Safety Directives & Policy</p>
-            </div>
-
-            <!-- アコーディオン構造 -->
-            <div class="space-y-5">
-                
-                <!-- ルール 01 -->
-                <div class="accordion-item bg-[#090f1d]/80 border border-gray-900 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:border-cyan-500/30">
-                    <button class="w-full text-left p-6 font-bold text-base sm:text-lg text-white flex items-center justify-between hover:bg-cyan-500/5 transition-colors focus:outline-none rule-toggle">
-                        <span class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                            <span class="text-cyan-400 font-gaming">01/ チート・不正外部モジュールの使用禁止</span>
-                            <span class="text-xs text-gray-500 font-mono sm:mt-0.5">[Hacks & Modified Clients Forbidden]</span>
-                        </span>
-                        <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-300 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button>
-                    <div class="rule-content bg-black/20 text-gray-300 text-sm leading-relaxed overflow-hidden transition-all duration-300 max-h-0">
-
-                        <div class="p-6 border-t border-gray-900/40 space-y-3">
-                            <p class="font-medium text-gray-200">透過MOD(X-Ray)、フライ、エイムハック、スピードハックなどあらゆるチートクライアントは使用不可です。検知エンジンが異常パケットを捉え次第、永久アクセス遮断となります。</p>
-                            <p class="text-xs text-gray-500 font-mono border-t border-gray-900/40 pt-2">Modified core packages like X-Ray engines or kinetic movement vectors are permanently unauthorized. Detection logs execute instant hardware access bans.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ルール 02 -->
-                <div class="accordion-item bg-[#090f1d]/80 border border-gray-900 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:border-cyan-500/30">
-                    <button class="w-full text-left p-6 font-bold text-base sm:text-lg text-white flex items-center justify-between hover:bg-cyan-500/5 transition-colors focus:outline-none rule-toggle">
-                        <span class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                            <span class="text-cyan-400 font-gaming">02/ グリーフィング・窃盗の自動保護</span>
-                            <span class="text-xs text-gray-500 font-mono sm:mt-0.5">[Griefing & Theft Countermeasures]</span>
-                        </span>
-                        <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-300 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button>
-                    <div class="rule-content bg-black/20 text-gray-300 text-sm leading-relaxed overflow-hidden transition-all duration-300 max-h-0">
-                        <div class="p-6 border-t border-gray-900/40 space-y-3">
-                            <p class="font-medium text-gray-200">他プレイヤーの建築エリアの破壊や物資の強奪を禁じます。自社コアが提供するセキュアな土地主張ロジックを活用し、暗号化拠点を維持してください。</p>
-
-                            <p class="text-xs text-gray-500 font-mono border-t border-gray-900/40 pt-2">Destructive interference inside recognized base coordinates is strictly denied. Utilize core security commands to anchor and encrypt your storages.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ルール 03 -->
-                <div class="accordion-item bg-[#090f1d]/80 border border-gray-900 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:border-cyan-500/30">
-                    <button class="w-full text-left p-6 font-bold text-base sm:text-lg text-white flex items-center justify-between hover:bg-cyan-500/5 transition-colors focus:outline-none rule-toggle">
-                        <span class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                            <span class="text-cyan-400 font-gaming">03/ コミュニティ内での健全なコミュニケーション</span>
-                            <span class="text-xs text-gray-500 font-mono sm:mt-0.5">[Data Stream Ethics & Demeanor]</span>
-                        </span>
-                        <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-300 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button>
-                    <div class="rule-content bg-black/20 text-gray-300 text-sm leading-relaxed overflow-hidden transition-all duration-300 max-h-0">
-                        <div class="p-6 border-t border-gray-900/40 space-y-3">
-                            <p class="font-medium text-gray-200">ゲーム内グローバルチャットおよび公式掲示板での過度な暴言、嫌がらせ、スパム行為を固く禁じます。すべてのプレイヤーが公平に楽しめる秩序を守りましょう。</p>
-                            <p class="text-xs text-gray-500 font-mono border-t border-gray-900/40 pt-2">Toxic communication within global streams or public logs is filtered. Maintain professional and courteous communication standards across the entire matrix.</p>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- コミュニティ＆メディアリンク -->
-    <section id="community" class="py-28 bg-gradient-to-b from-[#030712] to-[#010206] relative overflow-hidden border-t border-gray-900/40">
-        <div class="absolute inset-0 z-0 opacity-5 filter grayscale contrast-200">
-            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31" alt="Quantum Hardware Nodes" class="w-full h-full object-cover">
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- コミュニティ掲示板 -->
-                <div class="bg-gradient-to-b from-[#051122]/90 to-[#02070f]/90 border border-cyan-500/10 p-8 sm:p-12 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.6)] backdrop-blur-md flex flex-col justify-between items-center text-center relative hover:border-cyan-500/30 transition-all duration-500 group hover:-translate-y-1">
-                    <div>
-
-                        <div class="w-14 h-14 mx-auto bg-cyan-950 text-cyan-400 rounded-2xl flex items-center justify-center mb-6 border border-cyan-500/20 shadow-inner group-hover:scale-110 transition-transform duration-500">
-                            <svg class="w-7 h-7 neon-text-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                            </svg>
-                        </div>
-                        <h2 class="text-2xl sm:text-3xl font-black text-white mb-2 tracking-wide font-gaming">OFFICIAL DATABOARD</h2>
-                        <p class="text-gray-200 text-sm mb-1 font-bold">公式インテリジェンス掲示板</p>
-                        <p class="text-gray-400 text-xs mb-6 leading-relaxed">
-                            新規アップデートの仕様公開、クランメンバー募集、建築自慢、および管理者Mai氏へのバグ・チート報告等はこちらの集中ログへ。
+                    <div class="space-y-4 text-xs sm:text-sm leading-relaxed text-zinc-300">
+                        <p>
+                            「maimodserver (nomod)」は、よくある無料テンプレートを使い回したサーバーではありません。管理者Mai氏独自のパケット最適化制御をコア層に直接適用し、ラグや遅延を最小限に抑えた快適な接続環境を維持します。
                         </p>
-                        <p class="text-gray-500 text-xs font-mono border-t border-gray-900/40 pt-3 mb-8">
-                            Synthesize patch protocols, track core economy updates, broadcast clan entries, or interface directly with admin Mai.
+                        <p class="text-[11px] text-zinc-500 font-mono pl-3 border-l-2 border-zinc-700">
+                            Developed independently on dedicated cloud nodes. Tailored network synchronization mitigates entity rendering delays natively.
+                        </p>
+                        <p>
+                            外部の不正改造ハッククライアントからの不審なデータパケットをリアルタイムで自動遮断。チートの一切ない公平な世界で、純粋な開拓とスキル勝負ができる環境をインフラレベルで24時間保証します。
+                        </p>
+                        <p class="text-[11px] text-zinc-500 font-mono pl-3 border-l-2 border-zinc-700">
+                            Proprietary logic inspection intercepts illegitimate movements and validation tools natively around the clock.
                         </p>
                     </div>
-                    <a href="https://maimodserver.1my.jp/#id109146" target="_blank" rel="noopener noreferrer" class="w-full relative group inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-600 to-emerald-600 text-white font-black font-gaming text-xs tracking-widest rounded-xl transition-all duration-300 shadow-xl hover:scale-[1.02]">
-                        <span class="relative z-10 flex flex-col items-center">
-                            <span class="font-bold">データボードへアクセス</span>
-                            <span class="text-[9px] text-cyan-200 tracking-wider mt-0.5">OPEN COMM STREAM</span>
-                        </span>
+                </section>
 
-                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-                    </a>
-                </div>
+                <!-- セクション 2: セクター（SECTORS ARCHITECTURE） -->
 
-                <!-- 公式YouTube -->
-                <div class="bg-gradient-to-b from-[#1c0f16]/90 to-[#0e080b]/90 border border-red-500/10 p-8 sm:p-12 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.6)] backdrop-blur-md flex flex-col justify-between items-center text-center relative hover:border-red-500/30 transition-all duration-500 group hover:-translate-y-1">
-                    <div>
-                        <div class="w-14 h-14 mx-auto bg-red-950 text-red-400 rounded-2xl flex items-center justify-center mb-6 border border-red-500/20 shadow-inner group-hover:scale-110 transition-transform duration-500">
-                            <svg class="w-7 h-7 neon-text-red" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                            </svg>
-                        </div>
-                        <h2 class="text-2xl sm:text-3xl font-black text-white mb-2 tracking-wide font-gaming">BROADCAST MATRIX</h2>
-                        <p class="text-gray-200 text-sm mb-1 font-bold">公式高画質映像アーカイブ</p>
-                        <p class="text-gray-400 text-xs mb-6 leading-relaxed">
-                            maimodserverの美しいワールドツアー映像、ミニゲームのトーナメントハイライト、最新アップデートのビジュアルPVを公開中。
-                        </p>
-                        <p class="text-gray-500 text-xs font-mono border-t border-gray-900/40 pt-3 mb-8">
-                            Stream official visualization grids. View architectural exhibitions, minigame speed records, and event summaries.
-
-                        </p>
+                <section id="sectors" class="space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-2 h-6 bg-[#5cbf26]"></div>
+                        <h2 class="text-xl sm:text-2xl font-black text-white font-minecraft-pixel uppercase">SECTORS / セクター</h2>
                     </div>
-                    <a href="https://m.youtube.com/channel/UCc5VOp97rYiQFM9ABhKUS1w/videos?ra=m" target="_blank" rel="noopener noreferrer" class="w-full relative group inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-red-600 to-rose-600 text-white font-black font-gaming text-xs tracking-widest rounded-xl transition-all duration-300 shadow-xl hover:scale-[1.02]">
-                        <span class="relative z-10 flex flex-col items-center">
-                            <span class="font-bold">映像ストリームを視聴する</span>
-                            <span class="text-[9px] text-rose-200 tracking-wider mt-0.5">WATCH VISUAL LOGS</span>
-                        </span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-                    </a>
-                </div>
 
-            </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- サバイバル -->
+                        <div class="official-card p-5 space-y-3">
+                            <span class="text-[8px] font-minecraft-pixel text-green-400 block">[SEC_01]</span>
+                            <h3 class="text-sm font-bold text-white font-minecraft-pixel uppercase">SURVIVAL / サバイバル</h3>
+                            <p class="text-zinc-300 text-xs leading-relaxed">
+                                どこまでも広がる無限の大地を仲間と共有・開拓。高度な土地保護コードを組み込んでいるため、自分が建設した大切な拠点が他のユーザーに破壊される心配はありません。
+                            </p>
+                            <p class="text-zinc-500 text-[10px] font-mono border-t border-zinc-800 pt-2">
+                                Secure chunk claiming commands safeguard custom architectures natively.
+                            </p>
+                        </div>
+
+
+                        <!-- ミニゲーム -->
+                        <div class="official-card p-5 space-y-3">
+                            <span class="text-[8px] font-minecraft-pixel text-green-400 block">[SEC_02]</span>
+                            <h3 class="text-sm font-bold text-white font-minecraft-pixel uppercase">MINIGAMES / アリーナ</h3>
+                            <p class="text-zinc-300 text-xs leading-relaxed">
+                                PVP、アスレチック、各種ミニゲーム専用特設ステージ。不正なツールや改造が完全に排除されたイコールコンディションの競技空間で、自身の限界に挑むことができます。
+                            </p>
+                            <p class="text-zinc-500 text-[10px] font-mono border-t border-zinc-800 pt-2">
+                                Test mechanical mastery inside high-performance responsive matched zones.
+                            </p>
+                        </div>
+
+                        <!-- 夜間特典（フルサイズ展開） -->
+                        <div class="official-card p-5 sm:col-span-2 border-green-800/60 bg-[#192b17]/20 space-y-2">
+                            <span class="text-[8px] font-minecraft-pixel text-green-400 block">[INCENTIVE]</span>
+                            <h3 class="text-sm font-bold text-white font-minecraft-pixel uppercase">BONUS / 夜間接続特典</h3>
+                            <p class="text-zinc-300 text-xs leading-relaxed">
+                                当サーバー伝統の<strong>「夜の時間帯に来ると嬉しい特典」</strong>システム。仕事や学校終わりにアクセスするプレイヤー層へ、独自の同期スクリプトが嬉しいインセンティブを自動付与します。
+                            </p>
+
+                            <p class="text-green-600/80 text-[10px] font-mono border-t border-green-900/30 pt-2">
+                                Automated sync distribution grants structural collection multipliers during night logs.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- セクション 3: 規約（RULES / COMPLIANCE） -->
+                <section id="directives" class="space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-2 h-6 bg-[#5cbf26]"></div>
+                        <h2 class="text-xl sm:text-2xl font-black text-white font-minecraft-pixel uppercase">RULES / 安全憲章</h2>
+                    </div>
+
+                    <!-- アコーディオン構造 -->
+                    <div class="space-y-4">
+                        <!-- 規約 01 -->
+                        <div class="accordion-item official-card rounded-none overflow-hidden transition-all duration-200">
+                            <button class="w-full text-left p-4 font-bold text-white flex items-center justify-between hover:bg-white/5 focus:outline-none rule-toggle">
+
+                                <span class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                                    <span class="text-green-400 font-minecraft-pixel text-[9px] tracking-wider">01 / NO HACKS CLIENTS</span>
+                                    <span class="text-xs text-zinc-400 font-sans font-bold">[チート全面禁止]</span>
+                                </span>
+                                <svg class="w-4 h-4 text-zinc-500 transform transition-transform duration-300 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="rule-content bg-black/20 text-zinc-300 text-xs leading-relaxed overflow-hidden transition-all duration-300 max-h-0">
+                                <div class="p-4 border-t-2 border-zinc-800 space-y-2">
+                                    <p>透過、飛行(Fly)、各種自動エイム、移動速度変更ツールを含む、全ての不正な外部モジュール・ハッククライアントを禁止します。検知システムがパケット異常を捉え次第、インフラ側でハードウェアアクセス追放（永久BAN）を自動執行します。</p>
+                                    <p class="text-[10px] text-zinc-500 font-mono border-t border-zinc-800/40 pt-2">External modification architectures or speed factor tools are prohibited. System nodes execute hardware access drops on detection logs.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 規約 02 -->
+                        <div class="accordion-item official-card rounded-none overflow-hidden transition-all duration-200">
+                            <button class="w-full text-left p-4 font-bold text-white flex items-center justify-between hover:bg-white/5 focus:outline-none rule-toggle">
+                                <span class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                                    <span class="text-green-400 font-minecraft-pixel text-[9px] tracking-wider">02 / DOMAIN SECURITY</span>
+
+                                    <span class="text-xs text-zinc-400 font-sans font-bold">[破壊・窃盗の禁止]</span>
+                                </span>
+                                <svg class="w-4 h-4 text-zinc-500 transform transition-transform duration-300 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="rule-content bg-black/20 text-zinc-300 text-xs leading-relaxed overflow-hidden transition-all duration-300 max-h-0">
+                                <div class="p-4 border-t-2 border-zinc-800 space-y-2">
+                                    <p>他のプレイヤーが所有する土地エリアの無断破壊、チェストからの物資窃盗、および迷惑行為を固く禁じます。提供されている土地主張コマンドを使用して拠点を暗号化・保護してください。悪質な違反はログデータより特定され、処分の対象となります。</p>
+                                    <p class="text-[10px] text-zinc-500 font-mono border-t border-zinc-800/40 pt-2">Griefing inside verified player domains is restricted. Secure territories via internal protection frameworks to anchor asset metrics.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 規約 03 -->
+                        <div class="accordion-item official-card rounded-none overflow-hidden transition-all duration-200">
+                            <button class="w-full text-left p-4 font-bold text-white flex items-center justify-between hover:bg-white/5 focus:outline-none rule-toggle">
+                                <span class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                                    <span class="text-green-400 font-minecraft-pixel text-[9px] tracking-wider">03 / STREAM ETHICS</span>
+                                    <span class="text-xs text-zinc-400 font-sans font-bold">[健全なマナーの遵守]</span>
+                                </span>
+
+                                <svg class="w-4 h-4 text-zinc-500 transform transition-transform duration-300 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="rule-content bg-black/20 text-zinc-300 text-xs leading-relaxed overflow-hidden transition-all duration-300 max-h-0">
+                                <div class="p-4 border-t-2 border-zinc-800 space-y-2">
+                                    <p>ゲーム内全体チャット、および公式コミュニティ掲示板内での過度な誹謗中傷、暴言、スパムメッセージの送信を禁止します。すべての開拓者が快適に、等しく楽しめるクリーンな秩序の維持に協力をお願いします。</p>
+                                    <p class="text-[10px] text-zinc-500 font-mono border-t border-zinc-800/40 pt-2">Toxic streams, targeting harassment, or advertising spam logs will be automatically filtered. Maintain polite behavioral codes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- セクション 4: コミュニティ＆メディア（COMMUNITY / STREAM 統合配置） -->
+                <section id="community" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- 公式掲示板 -->
+                    <div class="official-card p-6 flex flex-col justify-between items-center text-center">
+                        <div class="space-y-3 w-full">
+                            <div class="w-8 h-8 mx-auto bg-zinc-900 text-green-400 flex items-center justify-center border-2 border-zinc-700 font-minecraft-pixel text-xs">M</div>
+                            <h4 class="text-xs font-bold text-white font-minecraft-pixel uppercase">DATABOARD</h4>
+
+                            <p class="text-green-500 text-[10px] font-bold">公式コミュニティ掲示板</p>
+                            <p class="text-zinc-300 text-xs leading-relaxed">
+                                アップデート告知、チームメンバー募集、自慢の建築共有、管理者Mai氏へのバグ報告等はこちらのパブリックストリームへ。
+                            </p>
+                        </div>
+                        <a href="https://maimodserver.1my.jp/#id109146" target="_blank" rel="noopener noreferrer" class="w-full official-btn-gray text-white text-[9px] py-2.5 mt-6 font-minecraft-pixel">
+                            OPEN BOARD
+                        </a>
+                    </div>
+
+                    <!-- 公式YouTube -->
+                    <div class="official-card p-6 flex flex-col justify-between items-center text-center">
+                        <div class="space-y-3 w-full">
+                            <div class="w-8 h-8 mx-auto bg-zinc-900 text-red-500 flex items-center justify-center border-2 border-zinc-700 text-base">
+                                <svg class="w-4 h-4 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                </svg>
+                            </div>
+                            <h4 class="text-xs font-bold text-white font-minecraft-pixel uppercase">YOUTUBE</h4>
+
+                            <p class="text-red-400 text-[10px] font-bold">公式高画質映像ストリーム</p>
+                            <p class="text-zinc-300 text-xs leading-relaxed">
+                                サーバー内の巨大都市紹介シネマ、定期開催されるアスレチック・PVPトーナメントのダイジェスト映像を随時公開中。
+                            </p>
+                        </div>
+                        <a href="https://m.youtube.com/channel/UCc5VOp97rYiQFM9ABhKUS1w/videos?ra=m" target="_blank" rel="noopener noreferrer" class="w-full official-btn-green text-white text-[9px] py-2.5 mt-6 font-minecraft-pixel">
+                            WATCH VIDEO
+                        </a>
+                    </div>
+                </section>
+
+            </main>
         </div>
-    </section>
+    </div>
 
     <!-- フッター -->
-    <footer class="bg-[#010206] text-gray-600 py-16 border-t border-gray-900/60 text-center text-sm font-medium tracking-wide">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-            <p class="max-w-md mx-auto text-[11px] text-gray-500/60 leading-relaxed">
+    <footer class="bg-[#141414] text-zinc-600 py-12 border-t-4 border-[#151515] text-center text-xs relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+            <p class="max-w-md mx-auto text-[10px] text-zinc-500/60 leading-relaxed">
 
                 当サーバーおよびWebサイトは、Minecraftの公式開発元であるMojang StudiosおよびMicrosoft社とは一切関係がありません。<br>
-                This site and server are not affiliated with Mojang Studios or Microsoft.
+                This community site and dedicated server network are not affiliated with Mojang Studios or Microsoft Corporation.
             </p>
-            <p class="font-gaming text-xs tracking-widest text-cyan-500/30">
-                &copy; 2026 maimodserver. ULTRA FUTURE MATRIX SECURED.
+            <p class="font-minecraft-pixel text-[8px] text-zinc-700 tracking-wider">
+                &copy; 2026 maimodserver. ALL RIGHTS RESERVED.
             </p>
         </div>
     </footer>
 
     <!-- JavaScript ロジック -->
     <script>
-        // モバイルナビゲーション開閉
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        mobileMenu.querySelectorAll('a').forEach(link => {
-
-            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-        });
-
         // IPアドレスコピー機能
         const copyBtn = document.getElementById('copy-btn');
         const serverIpText = document.getElementById('server-ip').innerText;
@@ -571,20 +479,16 @@
         copyBtn.addEventListener('click', () => {
             const tempTextarea = document.createElement('textarea');
             tempTextarea.value = serverIpText;
+
             document.body.appendChild(tempTextarea);
             tempTextarea.select();
             
             try {
                 document.execCommand('copy');
                 copyTextSpan.innerText = 'COPIED!';
-                copyBtn.classList.remove('from-cyan-600', 'to-emerald-600');
-                copyBtn.classList.add('from-emerald-500', 'to-teal-400');
-
                 
                 setTimeout(() => {
                     copyTextSpan.innerText = 'COPY IP';
-                    copyBtn.classList.remove('from-emerald-500', 'to-teal-400');
-                    copyBtn.classList.add('from-cyan-600', 'to-emerald-600');
                 }, 2000);
             } catch (err) {
                 copyTextSpan.innerText = 'FAILED';
@@ -595,11 +499,11 @@
         // 利用規約アコーディオン処理
         const ruleToggles = document.querySelectorAll('.rule-toggle');
         ruleToggles.forEach(toggle => {
+
             toggle.addEventListener('click', (e) => {
                 const currentItem = e.currentTarget.closest('.accordion-item');
                 const content = currentItem.querySelector('.rule-content');
                 const icon = currentItem.querySelector('svg');
-
                 
                 if (content.style.maxHeight && content.style.maxHeight !== '0px') {
                     content.style.maxHeight = '0px';
@@ -611,20 +515,10 @@
             });
         });
 
-        // スクロールによるヘッダーの透過ブレンド変化
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('bg-[#030712]/95', 'shadow-2xl');
-            } else {
-                nav.classList.remove('bg-[#030712]/95', 'shadow-2xl');
-            }
-
-        });
-
-        // 20秒放置によるホラー化イースターエッグ (サイバーウイルス感染風)
+        // 20秒放置によるホラー化イースターエッグ (古代都市・スカルク侵食風)
         let idleTimer;
         const idleTimeoutDuration = 20000; // 20秒
+
 
         function startIdleTimer() {
             clearTimeout(idleTimer);
@@ -640,12 +534,12 @@
             startIdleTimer();
         }
 
-
         ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
             window.addEventListener(evt, resetIdleState);
         });
 
         startIdleTimer();
+
     </script>
 </body>
 </html>
